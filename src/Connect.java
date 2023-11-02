@@ -22,15 +22,18 @@ public class Connect {
             return new String[0][0];
         }
 
+        final int rowSize = 5;
+        final int columnSize = 3;
+
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              Statement statement = connection.createStatement()
         ) {
             ResultSet result = statement.executeQuery(select);
-            String[][] obj = new String[5][3];
+            String[][] obj = new String[rowSize][columnSize];
 
             if (result.next()) {
-                for (int i = 1; i <= 5; i++) {
-                    for (int j = 0; j < 3; j++) {
+                for (int i = 1; i <= rowSize; i++) {
+                    for (int j = 0; j < columnSize; j++) {
                         obj[i - 1][j] = result.getString(j + 1);
                     }
                     result.next();
